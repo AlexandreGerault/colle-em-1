@@ -1,0 +1,79 @@
+\exercice{Induction et loi de Faraday}
+
+Un solénoïde $\mathcal{S}_1$ de longueur $l$, de section circulaire de rayon $R_1$, d'axe $Oz$, comporte $n$ spires jointives par unité de longueur. Sa résistance interne est négligeable. Ce solénoïde est suffisamment long $\left( l \gg R_1 \right)$ pour être considéré de longueur infinie. Il est parcourut par un courant d'intensité $i_1 (t)$ dépendant du temps. Dans cet exercice, on adopte le système de coordonnées cylindriques d'axe $Oz$. On se place dans le cadre de l'\gls{arqs}. L'orientation (algébrique) du circuit est choisie de sorte que le champ magnétique à l'intérieur du solénoïde s'écrit
+\begin{equation}
+  \vv{B}_1 \left( r < R_1, t \right) = B_1 \left( t \right) \vv{u_z} = + \mu_0 n i_1 (t) \vv{u_z}
+\end{equation}
+
+\question{Représenter sur un schéma le sens positif adopté pour l'intensité $i_1 (t)$}
+\begin{figure}[H]
+  \centering
+  \input{./tex/graphics/induction_and_faraday_cylinder}
+  \caption{Schéma représentatif de la situation étudiée}
+\end{figure}
+
+\question{Exprimer le flux propre $\phi_1 (t)$ du champ magnétique $\vv{B}_1$ à travers le solénoïde et en déduire l'auto-inductance $L_1$ de ce dernier.}
+
+On commence par calculer le flux propre du champ magnétique $\vv{B}_1$ à travers $\mathcal{S}_1$ par son expression générale :
+\begin{equation}
+  \phi_1 (t) = \iint_{S_1} \vv{B}_1 (t) \cdot \vv{n} \diff{S} = \mu i_1 (t) n \pi R_1^2
+\end{equation}
+Puis on écrit son expression avec $L_1$ :
+\begin{equation}
+  \phi_1 (t) = L_1 i_1 (t)
+\end{equation}
+Ainsi on peut isoler le terme $L_1$ :
+\begin{equation}
+  \boxed{L_1 = \mu n \pi R_1^2}
+\end{equation}
+
+\question{À l'aide des symétries et invariances de la distribution de courants, montrer que le potentiel vecteur $\vv{A}_1(M,t)$ créé en un point $M$ situé à une distance $r$ de l'axe du solénoïde est de la forme $\vv{A}_1 (M,t) = A_1 (r,t) \vv{u_\theta}$.}
+
+On commence par rappeler que le potentiel vecteur suit les mêmes règles de symétries que le champ électrique. Ainsi en déterminant les plans de symétries et les invariances on peut raisonner comme avec le champ électrique.
+
+\paragraph*{Invariances}
+On peut identifier une invariance par rotation autour de l'axe $Oz$ et par translation sur $z$ étant donné que le cylindre peut être considéré comme infini. On en déduit que $A(M,t) = A(r,t)$.
+
+\paragraph*{Plans de symétries}
+On a une symétrie des distributions de courants selon le plan $\left( \vv{u_r}, \vv{u_z} \right)$, passant sur l'axe $Oz$, et une antisymétrie des distributions de courants selon le plan $\left( \vv{u_r}, \vv{u_z} \right)$. Ainsi on en déduit, comme on le ferait avec le champ électrique (on raisonne alors sur la distribution de charges et non de courants), que $\vv{A} = A \vv{u_\theta}$.
+
+\paragraph*{Conclusion} On peut alors en conclure que $\vv{A} (M,t) = A(r,t) \vv{u_\theta}$.
+
+\question{Exprimer $\vv{A} (M,t)$ en tout point intérieur au solénoïde et à tout instant $t$. Vérifier que ce potentiel n'est défini sur $Oz$ que si $A_1(r=0, t) = 0 ~ \forall t$.}
+
+On rappelle que le potentiel vecteur $\vv{A} (M,t)$ est lié au champ magnétique d'après la relation suivante :
+\begin{equation}
+  \vv{B} = \vv{\nabla} \wedge \vv{A}
+\end{equation}
+
+On utilise le système de coordonnées cylindriques donc on peut écrire l'opérateur $\vv{\nabla}$ comme :
+\begin{equation}
+  \vv{\nabla} =
+  \begin{pmatrix}
+    \frac{\partial}{\partial r}\\
+    \frac{1}{r} \cdot \frac{\partial}{\partial \theta}\\
+    \frac{\partial}{\partial z}
+  \end{pmatrix}
+\end{equation}
+Donc on peut réécrire la relation qui relie $\vv{B}$ et $\vv{A}$.
+\begin{equation}
+    \begin{pmatrix} 0 \\ 0 \\ \mu_0 n i_1(t) \end{pmatrix} =
+    \begin{pmatrix}
+      \frac{\partial}{\partial r}\\
+      \frac{1}{r} \cdot \frac{\partial}{\partial \theta}\\
+      \frac{\partial}{\partial z}
+    \end{pmatrix} \wedge \begin{pmatrix}
+      0 \\ A_1(r,t) \\ 0
+    \end{pmatrix}
+    =
+    \frac{\partial A_1 (r,t)}{\partial r} \vv{u_z}
+\end{equation}
+Soit
+\begin{equation}
+  B_1(t) = \frac{\partial A_1(r,t)}{\partial t}
+\end{equation}
+On cherche alors une primitive :
+\begin{equation}
+  \int \frac{\partial A_1 (r,t)}{\partial r}\diff{r} = \int \mu_0 n i_1 (t) \diff{r}
+  \implies A_1 (r,t) = \mu_0 n i_1 (t) r + \text{cste}
+\end{equation}

@@ -1,0 +1,7 @@
+PWD /home/etudiants/21615846/Documents/Colles/Électromagnétisme/Colle 1 - Semestre 2/tex/graphics
+INPUT /etc/texmf/web2c/texmf.cnf
+INPUT /usr/share/texmf/web2c/texmf.cnf
+INPUT /usr/share/texlive/texmf-dist/web2c/texmf.cnf
+INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
+INPUT /home/etudiants/21615846/Documents/Colles/Électromagnétisme/Colle 1 - Semestre 2/tex/graphics/induction_and_faraday_cylinder.tex
+OUTPUT /home/etudiants/21615846/Documents/Colles/Électromagnétisme/Colle 1 - Semestre 2/tex/graphics/induction_and_faraday_cylinder.log

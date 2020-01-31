@@ -3,6 +3,7 @@
   \def\cylwidth{8}
   \def\cylheight{1}
   \def\elwidth{0.5}
+  \tikzstyle arrowstyle=[scale=2] %Arrow size
 
   \coordinate (A) at (0,0);
   \coordinate (B) at ({\cylwidth}, 0);
@@ -26,4 +27,7 @@
   %Sizing
   \draw[<->] (A)++(0,{\cylheight+.5}) -- ++({\cylwidth},0) node[pos=.5,above] {$l$};
   \draw[<->] (A)++({-3*\elwidth}, {\cylheight}) -- ++(0,{-2*\cylheight}) node[pos=.5,left] {$2R_1$};
+
+  %Oriented spire
+  \draw[black, postaction={decorate,decoration={markings,mark=at position .3 with {\arrowreversed[arrowstyle]{stealth}}}}] (B)++({-\cylwidth / 2},{-\cylheight}) arc (-90:90:{\elwidth} and {\cylheight}) node[pos=.3,right]{$i_1(t)$};
 \end{tikzpicture}

@@ -16,7 +16,7 @@ Un solénoïde $\mathcal{S}_1$ de longueur $l$, de section circulaire de rayon $
 
 On commence par calculer le flux propre du champ magnétique $\vv{B}_1$ à travers $\mathcal{S}_1$ par son expression générale :
 \begin{equation}
-  \phi_1 (t) = \iint_{S_1} \vv{B}_1 (t) \cdot \vv{n} \diff{S} = \mu i_1 (t) n \pi R_1^2
+  \phi_1 (t) = \iint_{S_1} \vv{B}_1 (t) \cdot \vv{n} \diff{S} = \mu_0 i_1 (t) n \pi R_1^2
 \end{equation}
 Puis on écrit son expression avec $L_1$ :
 \begin{equation}
@@ -24,7 +24,7 @@ Puis on écrit son expression avec $L_1$ :
 \end{equation}
 Ainsi on peut isoler le terme $L_1$ :
 \begin{equation}
-  \boxed{L_1 = \mu n \pi R_1^2}
+  \boxed{L_1 = \mu_0 n \pi R_1^2}
 \end{equation}
 
 \question{À l'aide des symétries et invariances de la distribution de courants, montrer que le potentiel vecteur $\vv{A}_1(M,t)$ créé en un point $M$ situé à une distance $r$ de l'axe du solénoïde est de la forme $\vv{A}_1 (M,t) = A_1 (r,t) \vv{u_\theta}$.}
@@ -46,6 +46,7 @@ On rappelle que le potentiel vecteur $\vv{A} (M,t)$ est lié au champ magnétiqu
   \vv{B} = \vv{\nabla} \wedge \vv{A}
 \end{equation}
 
+\paragraph*{Sans le formulaire}
 On utilise le système de coordonnées cylindriques donc on peut écrire l'opérateur $\vv{\nabla}$ comme :
 \begin{equation}
   \vv{\nabla} =
@@ -77,3 +78,237 @@ On cherche alors une primitive :
   \int \frac{\partial A_1 (r,t)}{\partial r}\diff{r} = \int \mu_0 n i_1 (t) \diff{r}
   \implies A_1 (r,t) = \mu_0 n i_1 (t) r + \text{cste}
 \end{equation}
+
+\paragraph*{Avec le formulaire} On a ici
+\begin{equation}
+  \begin{split}
+    \begin{pmatrix} 0 \\ 0 \\ \mu_0 n i_1(t) \end{pmatrix}
+      &= \vv{\nabla} \wedge \vv{A_1}\\
+      &= \frac{1}{r} \frac{\partial \left( r A_1\left(r,t \right)\right)}{\partial r} \vv{u_z} \implies r \neq 0\\
+      \iff
+      \mu_0 n i_1 (t) &= \frac{1}{r} \frac{\partial \left( r A_1\left(r,t \right)\right)}{\partial r}\\
+      \iff
+      \int r \mu_0 n i_1 (t) \diff{r} &= \int A_1 (r,t) \frac{\partial \left( A_1\left(r,t \right)\right)}{\partial r} \diff{r}\\
+      \iff
+      \frac{r^2}{2} \mu_0 n i_1 (t) + \text{cst}_1 &= \frac{1}{2} A_1^2 (r,t) + \text{cst}_2
+  \end{split}
+\end{equation}
+On pose alors $\text{cst}_3 = \text{cst}_1 - \text{cst}_2$ et on obtient
+\begin{equation}
+  A_1(r,t) = \sqrt{r^2 \mu_0 n i_1(t) + \text{cst}_3}
+\end{equation}
+Le potentiel vecteur étant défini à une constante près on peut choisir $\text{cst}_3 = 0$ pour réécrire notre résultat :
+\begin{equation}
+  A_1(r,t) = r \sqrt{\mu_0 n i_1(t)}  \quad \text{pour } r \neq 0
+\end{equation}
+Par prolongement de la continuité de cette fonction sur $r$ on a
+\begin{equation}
+  \boxed{
+  \left\lbrace
+  \begin{split}
+    A_1 (r > 0,t) &= r \sqrt{\mu_0 n i_1(t)}\\
+    A_1 (r = 0,t) &= 0
+  \end{split}
+  \right.
+  }
+\end{equation}
+
+\paragraph*{Formulaire et théorème de Stokes} On a $\vv{B_1} = \vv{\nabla} \wedge \vv{A}_1$. On rappelle que le théorème de Stokes décrit l'égalité suivante pour un champ de vecteur $\vv{V}$ :
+\begin{equation}
+  \oint_\mathscr{C} \vv{V} \cdot \diff{\vv{l}} = \oiint_\mathcal{S} \vv{\nabla} \wedge \vv{V} \cdot \vv{n} \diff{S}
+\end{equation}
+ce qui nous permet alors d'établir l'égalité suivante ici (avec un cercle $\mathscr{C}$ de rayon $r \neq 0$ -- on ne divise jamais par 0 ! -- constant et de surface $\mathcal{S}$) :
+\begin{equation}
+  \begin{split}
+    \oint_\mathscr{C} \vv{A_1} \cdot \diff{\vv{l}} &= \oiint_\mathcal{S} \vv{B_1} \cdot \vv{n} \diff{S}\\
+    \oint_\mathscr{C} A_1 (r,t) \vv{u_\theta} \cdot r \diff{\theta} \vv{u_\theta} &= \oiint_\mathcal{S} \mu_0 n i_1(t) \vv{u_z} \cdot \vv{u_z} \diff{S}\\
+    2 \pi \cdot r A_1 (r,t) &= \mu_0 n i_1 (t) \pi r^2\\
+    \Aboxed{A_1 (r,t) &= \frac{\mu_0 n i_1 (t) r}{2}}
+  \end{split}
+\end{equation}
+
+\question{La dépendance temporelle de $\vv{B}_1 (M,t)$ induit un champ électrique $\vv{E}_1 (M,t)$. À l'aide de l'équation de Maxwell-Faraday, montrer que ce champ induit en tout point intérieur au solénoïde $\left( r < R_1 \right)$ s'écrit :
+\begin{equation}
+  \vv{E}_1 \left( M, t \right) = E_1 \left( r, t \right) \vv{u_\theta} = -\frac{r}{2} \frac{\diff{B_1 (t)}}{\diff{t}} \vv{u_\theta}
+\end{equation}
+soit
+\begin{equation}
+  \vv{E}_1 \left( M, t \right) = -\frac{\mu_0 n r}{2} \frac{\diff{i_1(t)}}{\diff{t}} \vv{u_\theta}
+\end{equation}}
+
+Pour répondre à cette question on commence par rappeller l'équation locale de Maxwell-Faraday :
+\begin{equation}
+  \vv{\nabla} \wedge \vv{E} = - \frac{\diff{\vv{B}_1 (t)}}{\diff{t}}
+\end{equation}
+Ensuite, pour éviter d'écrire une expression compliquée inutilement on commence par simplifier l'expression du champ électrique $\vv{E}_1 (M,t)$ à l'aide des plans de symétries et des invariances. On en déduit rapidement (d'après le raisonnement préalablement mené, en rappelant qu'un courant est un déplacement de charges) l'expression simplifiée de $\vv{E}_1$ donnée par le sujet :
+\begin{equation}
+  \vv{E}_1 (M,t) = E_1 (r,t) \vv{u_\theta}
+\end{equation}
+On écrit ensuite le théorème de Stokes (avec les mêmes variables que pour le potentiel vecteur) :
+\begin{equation}
+  \begin{split}
+    \oint_\mathscr{C} E_1 (r,t) \vv{u_\theta} \cdot r \diff{\theta} \vv{u_\theta}
+    &= \oiint_\mathcal{S} \vv{\nabla} \wedge \vv{E_1} (r,t) \cdot \vv{n} \diff{S}
+    = \oiint_\mathcal{S} -\frac{\diff{\vv{B_1}}}{\diff{t}} \cdot \vv{u_z} \diff{S}\\
+    \oint_\mathscr{C} E_1 (r,t) \vv{u_\theta} \cdot r \diff{\theta}
+    &= \oiint_\mathcal{S} -\frac{\diff{B_1}}{\diff{t}} \diff{S}\\
+    E_1 (r,t) \cdot r \cdot \oint_\mathscr{C} \diff{\theta}
+    &= - \mu_0 n \frac{\diff{i_1 (t)}}{\diff{t}} \cdot \oiint_\mathcal{S}  \diff{S}\\
+    2 \pi r E_1 (r,t) &= - \pi r^2 \mu_0 n \frac{\diff{i_1 (t)}}{\diff{t}}\\
+    E_1 (r,t) &= \frac{-r \mu_0 n}{2} \frac{\diff{i_1 (t)}}{\diff{t}}
+  \end{split}
+\end{equation}
+On retrouve bien
+\begin{equation}
+  \boxed{E_1 (r,t) \vv{u_\theta} = \frac{-r \mu_0 n}{2} \frac{\diff{i_1 (t)}}{\diff{t}} \vv{u_\theta}}
+\end{equation}
+
+\question{En déduire que le potentiel scalaire $V_1$ est constamment uniforme.}
+
+On sait
+\begin{equation}
+  \vv{\nabla} \wedge \vv{E} = - \frac{\diff{\vv{B}}}{\diff{t}} = - \frac{ \diff{\left(\vv{\nabla} \wedge \vv{A} \right)}}{\diff{t}} = - \vv{\nabla} \wedge \frac{\diff{\vv{A}}}{\diff{t}}
+  \iff
+  \vv{\nabla} \wedge \left( \vv{E} + \frac{\diff{\vv{A}}}{\diff{t}} \right) = 0
+\end{equation}
+On a un rotationnel nul donc $\vv{E} + \frac{\diff{\vv{A}}}{\diff{t}} = - \vv{\nabla} (V_1)$ or :
+\begin{equation}
+  E_1 (r,t) = \frac{-r \mu_0 n}{2} \frac{\diff{i_1 (t)}}{\diff{t}}
+  ,
+  \frac{\diff{A_1}}{\diff{t}} = \frac{-r \mu_0 n}{2} \frac{\diff{i_1 (t)}}{\diff{t}}
+  \implies
+  -\vv{\nabla} \left( V_1 \right) = \vv{0}
+\end{equation}
+Puisque le gradient du potentiel scalaire $V_1$ est nul on en déduit que ce dernier est constamment uniforme.
+
+\question{Discuter l'hypothèse d'un champ $\vv{B_1}$ uniforme dans le volume intérieur du solénoïde $\mathcal{S}_1$. Est-ce que cette hypothèse est compatible avec l'\gls{arqs} ?} Répondre plus tard
+
+On place à l'intérieur du solénoïde $\mathcal{S}_1$ une spire circulaire $\mathcal{S}_S$ de rayon $R_S$ $\left( R_S  R_1 \right)$, d'axe $Oz$. Son orientation est choisie de manière à ce que l'inductance mutuelle $M_S$ soit positive. Pour simplifier, on prend une spire de résistance élevée. L'amplitude de l'intensité $i_S (t)$ du courant induit dans la spire est alors négligeable devant celle de $i_1 (t)$ : $i_S (t) \approx 0 ~ \forall t$.
+
+\question{Exprimer le flux $\phi_{1 \to S}(t)$ du champ magnétique $\vv{B_1}$ à travers la spire. En déduire l'inductance mutuelle $M_S$.}
+
+On commence par caluler le flux de $\vv{B}_1$ à travers $\mathcal{S}_S$.
+\begin{equation}
+  \begin{split}
+    \phi_{1 \to S} (t)
+    &= \iint_{\mathcal{S}_S} \vv{B_1} \cdot \vv{n} \diff{S}\\
+    &= \mu_0 n i_1 (t) \iint_{\mathcal{S}_S} \diff{S}\\
+    \Aboxed{\phi_{1 \to S} (t)
+    &= \mu_0 n i_1 (t) \pi R_S^2}
+  \end{split}
+\end{equation}
+Puis on calcule le flux magnétique total à travers $\mathcal{S}_S$.
+\begin{equation}
+  \begin{split}
+    \phi_S (t)
+    &= \phi_{S,p} (t) + \phi{1 \to S} (t)\\
+    &= \iint_{\mathcal{S}_S} \vv{B}_S \cdot \vv{n} \diff{S} + \iint_{\mathcal{S}_S} \vv{B}_1 \cdot \vv{n} \diff{S}\\
+    &= L_S i_S (t) + M_S i_1 (t)\\
+    \phi_S (t) &= M_S i_1(t) = \mu_0 n i_1 (t) \pi R_S^2
+  \end{split}
+\end{equation}
+
+On en déduit \fbox{$M_S = \mu_0 n \pi R_S^2$}.
+
+\question{À l'aide de la loi de Faraday exprimer la force électromotrice $e_S (t)$ induite dans la spire.}
+
+\begin{equation}
+  \boxed{e_S(t) = -\frac{\diff{\phi_S (t)}}{\diff{t}} = - \mu_0 n \pi R_S^2 \frac{\diff{i_1(t)}}{\diff{t}}}
+\end{equation}
+
+\question{Exprimer la circulation $\mathcal{C}$ du champ électrique $\vv{E_1}$ le long de la spire. Comparer $\mathcal{C}$ et $e_S (t)$ et conclure.}
+
+\begin{equation}
+  \begin{split}
+    \mathcal{C} = \oint_{\mathscr{C}(\mathcal{S}_S)} \vv{E_1} \cdot \diff{\vv{l}}
+    &= - \frac{1}{2} \mu_0 R_S^2 n \frac{\diff{i_1 (t)}}{\diff{t}} \oint_{\mathscr{C}(\mathcal{S}_S)} \diff{\theta}\\
+    &= - \mu_0 R_S^2 n \pi \frac{\diff{i_1 (t)}}{\diff{t}}
+  \end{split}
+\end{equation}
+On a alors $e_S(t) = \mathcal{C}$. On en conclut que lorsque le champ magnétique est variable l'équation de Maxwell-Faraday nous permet de calculer la force électromotrice comme la circulation du champ électrique le long du contour d'une surface d'un circuit dont le courant est négligeable devant celui qui donne naissance au champ magnétique.
+
+\exercice{Phénomènes d'induction : cage de Faraday magnétique}
+
+On retire la spire circulaire et on place maintenant à l'intérieur du solénoïde $\mathcal{S}_1$ un solénoïde $\mathcal{S}_2$ de même longueur, de section circulaire de rayon $R_2$ $\left( R_2 < R_1 \right)$, d'axe $Oz$, comportant le même nombre de spires, et de résistance interne négligeable. Les bornes de ce deuxième solénoïde sont reliées par une resistance $\mathcal{R}$. Le courant induit dans ce circuit secondaire (comprenant $\mathcal{S}_2$ et $\mathcal{R}$) est d'intensité $i_2 (t)$. L'orientation algébrique du solénoïde $\mathcal{S}_2$ est choisie de manière à ce que l'inductance mutuelle $M$ entre les deux solénoïdes soit positive.
+
+\question{Exprimer le champ magnétique $\vv{B_2}$ créé par le courant d'intensité $\vv{i_2}(t)$.}
+
+\begin{equation}
+  \boxed{\vv{B_2} (t) = \mu_0 n i_2(t) \vv{u_z}}
+\end{equation}
+
+\question{Exprimer le flux propre $\phi_{2p} (t)$ du champ $\vv{B_2}$ à travers le solénoïde $\mathcal{S}_2$ et en déduire l'auto-inductance $L_2$ de ce dernier.}
+
+\begin{equation}
+  \boxed{\phi_{2p} (t) = nl\iint_{\mathcal{S}_2} \vv{B_2} \cdot \vv{n} \diff{S} = \mu_0 n^2 l i_2 (t) \pi R_S^2}
+\end{equation}
+\begin{equation}
+  \phi_{2p} (t) = L_2 i_2 (t)
+\end{equation}
+\begin{equation}
+  L_2 i_2 (t) = \mu_0 n^2 l i_2 (t) \pi R_S^2 \iff \boxed{L_2 = \mu_0 \pi R_S^2 n^2 l}
+\end{equation}
+
+\question{Exprimer le flux $\phi_{1 \to 2} (t)$ du champ $\vv{B_1}$ à travers $\mathcal{S}_2$.}
+
+\begin{equation}
+  \boxed{\phi_{1 \to 2} = nl \iint_{\mathcal{S}_2} \vv{B_1} \cdot \vv{n} \diff{S} = \mu_0 n^2 l i_1 (t) \pi R_S^2}
+\end{equation}
+
+\question{En déduire l'inductance mutuelle $M$. Comparer $M$ et $L_2$ puis commenter.}
+
+\begin{equation}
+  \left.
+  \begin{split}
+    \phi_2 (t)  &= \phi_{2p} (t) + \phi_{1 \to 2} (t)\\
+                &= \mu_0 n^2 l \pi R_2^2 i_2(t) + \mu n^2 l \pi R_2^2 i_1 (t)\\
+    \phi_2 (t)  &= L_2 i_2 (t) + M i_1 (t)
+  \end{split}
+  \right\rbrace
+  \implies
+  \boxed{M = \mu_0 n^2 l \pi R_2^2}
+\end{equation}
+On remarque alors immédiatement \fbox{$M = L_2$}. Il s'agit certainement d'un cas particulier car nos deux solénoïdes sont de même géométrie. Seule leur rayon change : le flux de $\mathcal{S}_2$ est entièrement capté par $\mathcal{S}_1$.
+
+\question{À l'aide des expressions de $\phi_{2p}(t)$ et de $\phi_{1\to 2} (t)$, exprimer le flux total $\phi_2 (t)$ du champ magnétique à travers $\mathcal{S}_2$ en fonction de $L_2$ et des intensités $i_1(t)$ et $i_2 (t)$, puis en fonction de $l$, $R_2$, $n$, $i_1(t)$ et $i_2(t)$.}
+
+\begin{equation}
+  \boxed{\phi_2 (t) = \phi_{2p} + \phi_{1 \to 2} = L_2 \left( i_1(t) + i_2 (t) \right) = \mu_0 n^2 l \pi R_2^2 \left( i_1(t) + i_2(t) \right)}
+\end{equation}
+
+\question{Vérifier ce dernier résultat en calculant directement le flux du champ magnétique total $\vv{B_t}$ à travers $\mathcal{S}_2$. ($\vv{B_t} = \vv{B_1} + \vv{B_2}$)}
+
+\begin{equation}
+  \phi_2 = nl \cdot \int_{\mathcal{S}_2} \vv{B_t} \cdot \vv{n} \diff{S} = \mu_0 n^2 l \iint_{\mathcal{S}_2} \diff{S} = \mu_0 n^2 l \left( i_1(t) + i_2 (t) \right) \pi R_2^2
+\end{equation}
+On obtient bien le même résultat.
+
+\question{Exprimer la force électromotrice $e_2 (t)$ induite dans le solénoïde $\mathcal{S}_2$ en fonction de $L_2$ et des dérivées premières des intensités $i_1(t)$ et $i_2 (t)$.}
+
+\begin{equation}
+  \boxed{e_2(t) = - \frac{\diff{\phi_2}}{\diff{t}} = -  \mu_0 n^2 l \pi R_2^2 \left( \frac{\diff{i_1(t)}}{\diff{t}} + \frac{\diff{i_2(t)}}{\diff{t}} \right)}
+\end{equation}
+
+
+\question{À l'aide de la loi d'Ohm et de la loi des mailles appliquée au circuit secondaire, montrer que les intensités $i_1 (t)$ et $i_2(t)$ vérifient l'équation différentielle suivante :
+\begin{equation}
+  \frac{\diff{i_1(t)}}{\diff{t}} + \frac{\diff{i_2 (t)}}{\diff{2}} + \omega_0 i_2(t) = 0
+\end{equation}
+où $\omega_0 = \frac{\mathcal{R}}{L_2}$ est la \emph{pulsation caractéristique} du circuit secondaire.}
+
+On applique la loi des mailles au circuit secondaire et on obtient :
+\begin{equation}
+  L_2 \frac{\diff{i_2 (t)}}{\diff{t}} + \mathcal{R} i_2 (t) = - L_2 \frac{\diff{i_1 (t)}}{\diff{t}} \implies L_2 \frac{\diff{i_2 (t)}}{\diff{t}} + \mathcal{R} i_2 (t) + L_2 \frac{\diff{i_1 (t)}}{\diff{t}} = 0
+\end{equation}
+En factorisant par $L_2$ et en posant $\omega_0 = \frac{\mathcal{R}}{L_2}$ on obtient
+\begin{equation}
+  \boxed{\frac{\diff{i_2(t)}}{\diff{t}} + \frac{\diff{i_1 (t)}}{\diff{t}} + \omega_0 i_2 (t) = 0}
+\end{equation}
+
+\question{Le solénoïde $\mathcal{S}_1$ est branché à un générateur de courant (idéal) qui impose une intensité $i_1(t) = I_0 \cos \left( \omega t \right)$. En adoptant la notation complexe, exprimer l'intensité complexe $\underline{i_2}(t)$ en fonction de $\underline{i_1}(t)$.}
+
+\begin{equation}
+  \underline{i_2} (t) j\omega + \underline{i_1} (t) j \omega + \underline{i_2} (t) \omega_0 = 0 \iff \boxed{\underline{i_2} (t) = \frac{j\omega}{j\omega + \omega_0} \underline{i_1} (t)}
+\end{equation}
+
+\question{Que devient $i_2 (t)$ lorsque la pulsation $\omega$ tend vers $0$ ? Commenter.}
